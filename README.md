@@ -1,4 +1,4 @@
 # Проект 4: Место
 
 ## **Описание проекта:**  Данный проект является первым опытом работы с JavaScript. Мы научились задавать переменные и работать с ними.
-[Ссылка на проект](https://elizavetakochneva.github.io/russian-travel/)
+[Ссылка на проект](https://elizavetakochneva.github.io/mesto/index.html)

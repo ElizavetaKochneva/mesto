@@ -1,7 +1,7 @@
 .profile__pencil{
   background:url(../../../images/pencil.svg);
   margin: auto auto auto 10px;
-  width:18px ;
+  width:18px;
   height: 18px;
   background-size: cover;
   background-position: center;
@@ -11,7 +11,7 @@
 @media(min-width:768px){
   .profile__pencil{
     margin: auto auto auto 14px;
-    width: 21px ;
+    width: 21px;
     height: 21px;
   }
 }

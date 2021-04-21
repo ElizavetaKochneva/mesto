@@ -1,0 +1,14 @@
+.body__container{
+  max-width: 282px;
+}
+@media(min-width:768px){
+  .body__container{
+   max-width: 580px;
+  }
+}
+
+ @media(min-width:1280px){
+   .body__container{
+    max-width: 880px;
+   }
+ }

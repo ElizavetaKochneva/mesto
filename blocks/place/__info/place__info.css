@@ -1,0 +1,14 @@
+.place__info{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  max-width: 246px;
+  min-height: 23px;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  margin:25px auto auto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 17px;
+  line-height: 29px;
+
+  }

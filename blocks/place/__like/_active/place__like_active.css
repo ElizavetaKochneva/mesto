@@ -1,0 +1,9 @@
+.place__like_active{
+  background-image: url(../../../../images/like_a.svg);
+  opacity: 1;
+  width: 22px;
+  height: 19px;
+  background-size: cover;
+  background-position: center;
+  border: none;
+}

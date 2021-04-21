@@ -1,0 +1,24 @@
+.profile__plus{
+  background-image: url(../../../images/plus_m.svg);
+  width: 282px;
+  height: 50px;
+  background-size: cover;
+  background-position: center;
+  border: none;
+  background-color: black;
+  margin: 36px auto 0;
+  opacity: 1.0;
+  transition:opacity 3s linear 0s;
+}
+@media(min-width:768px){
+  .profile__plus{
+    background-image: url(../../../images/plus_l.svg);
+    width: 150px;
+    height: 50px;
+    margin: auto 0 auto auto;
+  }
+}
+.profile__plus:hover{
+  opacity: .6;
+  cursor: pointer;
+}

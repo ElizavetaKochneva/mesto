@@ -1,0 +1,19 @@
+.profile{
+  margin: 42px auto 36px;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+@media(min-width:768px){
+  .profile{
+    margin: 41px auto 44px;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+ @media(min-width:1280px){
+   .profile{
+    margin: 40px auto 51px;
+   }
+ }

@@ -1,0 +1,16 @@
+.popup__content{
+  width: 282px;
+  height: 322px;
+  background-color: white;
+  margin: auto;
+  border-radius: 10px;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: black;
+  position: relative;
+}
+@media(min-width:768px){
+  .popup__content{
+    width: 430px;
+    height: 330px;
+  }
+}

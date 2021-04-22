@@ -10,6 +10,7 @@
   opacity: 1.0;
   transition:opacity 3s linear 0s;
 }
+
 @media(min-width:768px){
   .popup__close{
     width: 40px;
@@ -18,6 +19,7 @@
     right:-39.62px;
   }
 }
+
 .popup__close:hover{
   opacity: .6;
   cursor: pointer;

@@ -10,6 +10,7 @@
   opacity: 1.0;
   transition:opacity 3s linear 0s;
 }
+
 @media(min-width:768px){
   .profile__plus{
     background-image: url(../../../images/plus_l.svg);
@@ -18,6 +19,7 @@
     margin: auto 0 auto auto;
   }
 }
+
 .profile__plus:hover{
   opacity: .6;
   cursor: pointer;

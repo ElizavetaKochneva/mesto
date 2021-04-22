@@ -8,6 +8,7 @@
   opacity: 1.0;
   transition:opacity 3s linear 0s;
 }
+
 .place__like:hover{
   opacity: .5;
   cursor: pointer;

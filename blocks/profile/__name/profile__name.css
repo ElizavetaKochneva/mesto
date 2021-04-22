@@ -3,6 +3,7 @@
   flex-direction: row;
   margin: 0 auto 14px;
 }
+
 @media(min-width:768px){
   .profile__name{
     margin: 22px auto 14px;

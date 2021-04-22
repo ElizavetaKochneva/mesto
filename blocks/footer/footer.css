@@ -1,15 +1,16 @@
 .footer{
   margin: 48px auto 36px;
 }
+
 @media(min-width:768px){
   .footer{
     margin: 57px auto 48px;
   }
 }
 
- @media(min-width:1280px){
-   .footer{
+@media(min-width:1280px){
+  .footer{
     margin: 67px auto 60px;
-   }
- }
+  }
+}
  

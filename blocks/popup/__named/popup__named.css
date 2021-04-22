@@ -5,10 +5,11 @@
   text-align: center;
   margin:25px 0 75px;
 }
+
 @media(min-width:768px){
   .popup__named{
-  font-size: 24px;
-  line-height: 29.5px;
-  margin:34px 0 54px;
+    font-size: 24px;
+    line-height: 29.5px;
+    margin:34px 0 54px;
   }
 }

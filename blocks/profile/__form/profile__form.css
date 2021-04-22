@@ -1,8 +1,9 @@
 .profile__form{
   margin: 0 auto;
 }
+
 @media(min-width:768px){
   .profile__form{
-  margin: 0;
+    margin: 0;
   }
 }

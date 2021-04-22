@@ -6,3 +6,9 @@
   font-size: 14px;
   line-height: 17px;
 }
+@media(min-width:768px){
+  .footer__copyright{
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

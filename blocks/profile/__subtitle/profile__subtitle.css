@@ -6,6 +6,7 @@
   font-size: 14px;
   line-height: 17px;
 }
+
 @media(min-width:768px){
   .profile__subtitle{
     margin: 0;
@@ -14,10 +15,10 @@
   }
 }
 
- @media(min-width:1280px){
-   .profile__subtitle{
+@media(min-width:1280px){
+  .profile__subtitle{
     margin: 0;
     font-size: 18px;
     line-height: 22px;
-   }
+  }
  }

@@ -23,9 +23,9 @@
     width: 24px;
     height: 24px;
   }
- }
+}
  
- .profile__pencil:hover{
-   opacity: .6;
-   cursor: pointer;
-  }
+.profile__pencil:hover{
+  opacity: .6;
+  cursor: pointer;
+}

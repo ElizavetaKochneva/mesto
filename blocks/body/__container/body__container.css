@@ -8,8 +8,8 @@
   }
 }
 
- @media(min-width:1280px){
-   .body__container{
-     max-width: 880px;
-   }
- }
+@media(min-width:1280px){
+  .body__container{
+    max-width: 880px;
+  }
+}

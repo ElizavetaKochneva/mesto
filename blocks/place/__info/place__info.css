@@ -3,9 +3,8 @@
   flex-direction: row;
   justify-content:space-between;
   max-width: 246px;
-  min-height: 23px;
+  padding: 25px 15px 31px 21px;
   font-family: Inter, Arial, Helvetica, sans-serif;
-  margin:25px auto auto;
   font-style: normal;
   font-weight: 900;
   font-size: 17px;

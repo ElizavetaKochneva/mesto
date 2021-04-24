@@ -9,6 +9,7 @@
   margin: 36px auto 0;
   opacity: 1.0;
   transition:opacity 3s linear 0s;
+  border-radius: 2px;
 }
 
 @media(min-width:768px){

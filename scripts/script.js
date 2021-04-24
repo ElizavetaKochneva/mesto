@@ -1,37 +1,29 @@
-let profilePencil = document.querySelector('.profile__pencil');
 let popup = document.querySelector('.popup');
-
-profilePencil.addEventListener('click', function(){
-    popup.classList.toggle('popup_is-opened');
-})
-
+let popupForm = document.querySelector('form[name="popup__form"]');
+let profilePencil = document.querySelector('.profile__pencil');
 let popupClose = document.querySelector('.popup__close');
+let popupTitle = popupForm.querySelector('#popup__title');
+let popupSubtitle = popupForm.querySelector('#popup__subtitle');
+let profileTitle = document.querySelector('.profile__title');
+let profileSubtitle = document.querySelector('.profile__subtitle');
 
-popupClose.addEventListener('click', function() {
-   popup.classList.toggle('popup_is-opened');
-})
+function popupOpening() {
+    popup.classList.toggle('popup_is-opened');
+    popupTitle.value = profileTitle.textContent;
+    popupSubtitle.value = profileSubtitle.textContent;
+}
 
-let popupContent = document.querySelector('.popup__content');
+function popupClosing() {
+    popup.classList.toggle('popup_is-opened');
+}
 
-function formSubmitHandler (evt) {
+function formSubmitHandler(evt) {
     evt.preventDefault();
-
-    let popupTitle = popupContent.querySelector('.popup__title');
-    let popupSubtitle = popupContent.querySelector('.popup__subtitle');
-    let profileTitle = document.querySelector('.profile__title');
-    let profileSubtitle = document.querySelector('.profile__subtitle');
-
     profileTitle.textContent = popupTitle.value;
     profileSubtitle.textContent = popupSubtitle.value;
-    popup.classList.toggle('popup_is-opened');
+    popupClosing();
 }
 
-popupContent.addEventListener('submit', formSubmitHandler);
-
-let placeLike = document.querySelectorAll('.place__like');
-
-for(let i=0; i<placeLike.length; i++) {
-    placeLike[i].addEventListener('click',function(){
-        placeLike[i].classList.toggle('place__like_active');
-})
-}
+profilePencil.addEventListener('click', popupOpening)
+popupClose.addEventListener('click', popupClosing)
+popupForm.addEventListener('submit', formSubmitHandler);

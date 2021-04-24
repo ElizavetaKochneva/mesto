@@ -2,14 +2,14 @@
   font-weight: 900;
   font-size: 18px;
   line-height: 22px;
-  text-align: center;
-  margin:25px 0 75px;
+  text-align: left;
+  margin:0 auto 75px 22px;
 }
 
 @media(min-width:768px){
   .popup__named{
     font-size: 24px;
     line-height: 29px;
-    margin:34px 0 54px;
+    margin:0 auto 48px 36px;
   }
 }

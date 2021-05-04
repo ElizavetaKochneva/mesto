@@ -1,0 +1,10 @@
+.popup__images{
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: white;
+  display: flex;
+  flex-direction:column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: auto;
+  position: relative;
+}

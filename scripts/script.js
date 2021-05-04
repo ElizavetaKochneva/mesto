@@ -48,34 +48,38 @@ const initialCards = [
     }
   ]; 
 
-function popupProfileToggle() {
-    popupProfile.classList.toggle('popup_is-opened');
-    if (popupProfile.classList.contains('popup_is-opened')) {
-        profileFormTitle.value = profileTitle.textContent;
-        profileFormSubtitle.value = profileSubtitle.textContent;
-    }
+function toggleClass(popup){
+  popup.classList.toggle('popup_is-opened');
 }
 
-function formSubmitProfile(evt) {
+function togglePopupProfile() {
+  toggleClass(popupProfile);
+  if (popupProfile.classList.contains('popup_is-opened')) {
+    profileFormTitle.value = profileTitle.textContent;
+    profileFormSubtitle.value = profileSubtitle.textContent;
+  }
+}
+
+function submitFormProfile(evt) {
     evt.preventDefault();
     profileTitle.textContent = profileFormTitle.value;
     profileSubtitle.textContent = profileFormSubtitle.value;
-    popupProfileToggle();
+    togglePopupProfile();
 }
 
-function popupPlaceToggle(){
-  popupPlace.classList.toggle('popup_is-opened');
+function togglePopupPlace(){
+  toggleClass(popupPlace);
   if (popupPlace.classList.contains('popup_is-opened')) {
     placeFormInfo.value='';
     placeFormImage.value='';
   }
 }
 
-function popupImagesToggle(){
-  popupImages.classList.toggle('popup_is-opened');
-};
+function addPlace(place){
+  places.prepend(place);
+}
 
-function placeAdd(name, link) {
+function createPlace(name, link) {
   const place = placeTemplate.querySelector('.place').cloneNode(true);
   const placeTitle = place.querySelector('.place__title');
   const placeImage = place.querySelector('.place__image');
@@ -84,7 +88,7 @@ function placeAdd(name, link) {
 
   placeTitle.textContent = name;
   placeImage.src = link;
-  places.prepend(place);
+  placeImage.alt = 'обложка карточки';
 
   placeLike.addEventListener('click',function(){
     placeLike.classList.toggle('place__like_active');
@@ -95,29 +99,35 @@ function placeAdd(name, link) {
   });
   
   placeImage.addEventListener('click',function(){
-    popupImagesToggle();
+    toggleClass(popupImages);
     popupImage.src = placeImage.src;
+    popupImage.alt = placeImage.alt;
     popupName.textContent = placeTitle.textContent;
-
   });
-};
 
-function formSubmitPlace(evt) {
+  return place;
+}
+
+function submitFormPlace(evt) {
   evt.preventDefault();
-  placeAdd(placeFormInfo.value, placeFormImage.value);
-  popupPlaceToggle();
+  const place = createPlace(placeFormInfo.value, placeFormImage.value);
+  addPlace(place);
+  togglePopupPlace();
 }
 
 initialCards.forEach(function(item){
-  placeAdd(item.name, item.link);
+  const place = createPlace(item.name, item.link);
+  addPlace(place);
 });
 
-profilePencil.addEventListener('click', popupProfileToggle)
-profileFormClose.addEventListener('click', popupProfileToggle)
-profileForm.addEventListener('submit', formSubmitProfile);
+profilePencil.addEventListener('click', togglePopupProfile)
+profileFormClose.addEventListener('click', togglePopupProfile)
+profileForm.addEventListener('submit', submitFormProfile);
 
-placeAddButton.addEventListener('click', popupPlaceToggle);
-placeFormClose.addEventListener('click', popupPlaceToggle);
-placeForm.addEventListener('submit', formSubmitPlace);
+placeAddButton.addEventListener('click', togglePopupPlace);
+placeFormClose.addEventListener('click', togglePopupPlace);
+placeForm.addEventListener('submit', submitFormPlace);
 
-imageClose.addEventListener('click',popupImagesToggle);
+imageClose.addEventListener('click', function(){
+  toggleClass(popupImages);
+});

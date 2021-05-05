@@ -88,7 +88,7 @@ function createPlace(name, link) {
 
   placeTitle.textContent = name;
   placeImage.src = link;
-  placeImage.alt = 'обложка карточки';
+  placeImage.alt = 'Фото "' + name + '"';
 
   placeLike.addEventListener('click',function(){
     placeLike.classList.toggle('place__like_active');

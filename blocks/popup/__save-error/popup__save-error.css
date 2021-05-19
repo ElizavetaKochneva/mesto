@@ -1,0 +1,9 @@
+.popup__save-error{
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.popup__save:hover{
+  opacity: 1.0;
+  cursor: default;
+}

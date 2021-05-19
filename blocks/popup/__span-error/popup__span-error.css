@@ -1,0 +1,28 @@
+.popup__span-error{
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  margin: 0;
+  text-align: left;
+  opacity: 0;
+  position: absolute;
+  top: 149px;
+  left: 22px;
+}
+
+.popup__span-error:last-of-type{
+  top:206px;
+}
+
+@media(min-width:768px){
+  .popup__span-error{
+    top: 143px;
+    left: 36px;
+  }
+
+  .popup__span-error:last-of-type{
+    top:200px;
+  }
+}

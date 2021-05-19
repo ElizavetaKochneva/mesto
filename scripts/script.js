@@ -55,8 +55,13 @@ function toggleClass(popup){
 function togglePopupProfile() {
   toggleClass(popupProfile);
   if (popupProfile.classList.contains('popup_is-opened')) {
+    const submitButton = popupProfile.querySelector('.popup__save');
     profileFormTitle.value = profileTitle.textContent;
+    profileFormTitle.classList.remove('popup__title-error');
     profileFormSubtitle.value = profileSubtitle.textContent;
+    profileFormSubtitle.classList.remove('popup__title-error');
+    submitButton.classList.remove('popup__save-error');
+    removeErrorMessage(profileForm)
   }
 }
 
@@ -70,8 +75,13 @@ function submitFormProfile(evt) {
 function togglePopupPlace(){
   toggleClass(popupPlace);
   if (popupPlace.classList.contains('popup_is-opened')) {
+    const submitButton = popupPlace.querySelector('.popup__save');
     placeFormInfo.value='';
+    placeFormInfo.classList.remove('popup__title-error');
     placeFormImage.value='';
+    placeFormImage.classList.remove('popup__title-error');
+    submitButton.classList.add('popup__save-error');
+    removeErrorMessage(placeForm)
   }
 }
 
@@ -120,14 +130,44 @@ initialCards.forEach(function(item){
   addPlace(place);
 });
 
+function removeErrorMessage (popup){
+  const errorMessageList = Array.from(popup.querySelectorAll('.popup__span-error'));
+  errorMessageList.forEach((errorMessage)=>{
+    errorMessage.classList.remove('popup__span-error_active')
+ })
+}
+
+popupProfile.addEventListener('click',function(evt){
+  if (evt.target === popupProfile){
+    togglePopupProfile();
+  }
+});
 profilePencil.addEventListener('click', togglePopupProfile)
 profileFormClose.addEventListener('click', togglePopupProfile)
 profileForm.addEventListener('submit', submitFormProfile);
 
+popupPlace.addEventListener('click',function(evt){
+  if (evt.target === popupPlace){
+    togglePopupPlace();
+  }
+});
 placeAddButton.addEventListener('click', togglePopupPlace);
 placeFormClose.addEventListener('click', togglePopupPlace);
 placeForm.addEventListener('submit', submitFormPlace);
 
+popupImages.addEventListener('click',function(evt){
+  if (evt.target === popupImages){
+    toggleClass(popupImages);
+  }
+});
 imageClose.addEventListener('click', function(){
   toggleClass(popupImages);
 });
+
+document.addEventListener('keydown',function(evt){
+  if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_is-opened')
+    toggleClass(activePopup);
+  }
+})
+

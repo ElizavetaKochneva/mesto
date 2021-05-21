@@ -61,7 +61,12 @@ function togglePopupProfile() {
     profileFormSubtitle.value = profileSubtitle.textContent;
     profileFormSubtitle.classList.remove('popup__title-error');
     submitButton.classList.remove('popup__save-error');
-    removeErrorMessage(profileForm)
+    submitButton.disabled = false;
+    removeErrorMessage(profileForm);
+    document.addEventListener('keydown', closeByEscape);
+  }
+  else {
+    document.removeEventListener('keydown', closeByEscape);
   }
 }
 
@@ -80,8 +85,14 @@ function togglePopupPlace(){
     placeFormInfo.classList.remove('popup__title-error');
     placeFormImage.value='';
     placeFormImage.classList.remove('popup__title-error');
+    submitButton.disabled = true;
     submitButton.classList.add('popup__save-error');
-    removeErrorMessage(placeForm)
+    removeErrorMessage(placeForm);
+    document.addEventListener('keydown', closeByEscape);
+
+  }
+  else {
+    document.removeEventListener('keydown', closeByEscape);
   }
 }
 
@@ -113,6 +124,7 @@ function createPlace(name, link) {
     popupImage.src = placeImage.src;
     popupImage.alt = placeImage.alt;
     popupName.textContent = placeTitle.textContent;
+    document.addEventListener('keydown', closeByEscape);
   });
 
   return place;
@@ -137,6 +149,14 @@ function removeErrorMessage (popup){
  })
 }
 
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_is-opened')
+    toggleClass(activePopup);
+    document.removeEventListener('keydown', closeByEscape);
+  }
+}
+
 popupProfile.addEventListener('click',function(evt){
   if (evt.target === popupProfile){
     togglePopupProfile();
@@ -145,6 +165,7 @@ popupProfile.addEventListener('click',function(evt){
 profilePencil.addEventListener('click', togglePopupProfile)
 profileFormClose.addEventListener('click', togglePopupProfile)
 profileForm.addEventListener('submit', submitFormProfile);
+
 
 popupPlace.addEventListener('click',function(evt){
   if (evt.target === popupPlace){
@@ -155,19 +176,14 @@ placeAddButton.addEventListener('click', togglePopupPlace);
 placeFormClose.addEventListener('click', togglePopupPlace);
 placeForm.addEventListener('submit', submitFormPlace);
 
+
 popupImages.addEventListener('click',function(evt){
   if (evt.target === popupImages){
     toggleClass(popupImages);
+    document.removeEventListener('keydown', closeByEscape);
   }
 });
 imageClose.addEventListener('click', function(){
   toggleClass(popupImages);
+  document.removeEventListener('keydown', closeByEscape);
 });
-
-document.addEventListener('keydown',function(evt){
-  if (evt.key === 'Escape') {
-    const activePopup = document.querySelector('.popup_is-opened')
-    toggleClass(activePopup);
-  }
-})
-

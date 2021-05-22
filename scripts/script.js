@@ -50,6 +50,12 @@ const initialCards = [
 
 function toggleClass(popup){
   popup.classList.toggle('popup_is-opened');
+  if (popup.classList.contains('popup_is-opened')) {
+    document.addEventListener('keydown', closeByEscape);
+  }
+  else {
+    document.removeEventListener('keydown', closeByEscape);
+  }
 }
 
 function togglePopupProfile() {
@@ -63,10 +69,6 @@ function togglePopupProfile() {
     submitButton.classList.remove('popup__save-error');
     submitButton.disabled = false;
     removeErrorMessage(profileForm);
-    document.addEventListener('keydown', closeByEscape);
-  }
-  else {
-    document.removeEventListener('keydown', closeByEscape);
   }
 }
 
@@ -87,12 +89,7 @@ function togglePopupPlace(){
     placeFormImage.classList.remove('popup__title-error');
     submitButton.disabled = true;
     submitButton.classList.add('popup__save-error');
-    removeErrorMessage(placeForm);
-    document.addEventListener('keydown', closeByEscape);
-
-  }
-  else {
-    document.removeEventListener('keydown', closeByEscape);
+    removeErrorMessage(placeForm)
   }
 }
 
@@ -124,7 +121,6 @@ function createPlace(name, link) {
     popupImage.src = placeImage.src;
     popupImage.alt = placeImage.alt;
     popupName.textContent = placeTitle.textContent;
-    document.addEventListener('keydown', closeByEscape);
   });
 
   return place;
@@ -153,7 +149,6 @@ function closeByEscape(evt) {
   if (evt.key === 'Escape') {
     const activePopup = document.querySelector('.popup_is-opened')
     toggleClass(activePopup);
-    document.removeEventListener('keydown', closeByEscape);
   }
 }
 
@@ -180,10 +175,8 @@ placeForm.addEventListener('submit', submitFormPlace);
 popupImages.addEventListener('click',function(evt){
   if (evt.target === popupImages){
     toggleClass(popupImages);
-    document.removeEventListener('keydown', closeByEscape);
   }
 });
 imageClose.addEventListener('click', function(){
   toggleClass(popupImages);
-  document.removeEventListener('keydown', closeByEscape);
 });

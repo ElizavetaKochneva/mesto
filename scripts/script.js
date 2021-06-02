@@ -1,3 +1,6 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const popupProfile = document.querySelector('#popup_profile');
 const profileForm = document.querySelector('#profile_form');
 const profilePencil = document.querySelector('.profile__pencil');
@@ -20,7 +23,7 @@ const popupImage = document.querySelector('.popup__image');
 const popupName = document.querySelector('.popup__name');
 
 const places= document.querySelector('.places');
-const placeTemplate = document.querySelector('#place-template').content;
+
 const initialCards = [
     {
       name: 'Архыз',
@@ -47,6 +50,17 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ]; 
+
+const validationList = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__title',
+  submitButtonSelector: '.popup__save',
+  inactiveButtonClass: 'popup__save-error',
+  inputErrorClass: 'popup__title-error',
+  errorClass: 'popup__span-error_active'
+};
+
+const formList = Array.from(document.querySelectorAll(validationList.formSelector));
 
 function toggleClass(popup){
   popup.classList.toggle('popup_is-opened');
@@ -97,45 +111,29 @@ function addPlace(place){
   places.prepend(place);
 }
 
-function createPlace(name, link) {
-  const place = placeTemplate.querySelector('.place').cloneNode(true);
+function openPlaceForm(place) {
   const placeTitle = place.querySelector('.place__title');
   const placeImage = place.querySelector('.place__image');
-  const placeLike = place.querySelector('.place__like');
-  const placeDelete = place.querySelector('.place__delete');
-
-  placeTitle.textContent = name;
-  placeImage.src = link;
-  placeImage.alt = 'Фото "' + name + '"';
-
-  placeLike.addEventListener('click',function(){
-    placeLike.classList.toggle('place__like_active');
-  });
-
-  placeDelete.addEventListener('click',function(){
-    place.remove();
-  });
-  
   placeImage.addEventListener('click',function(){
     toggleClass(popupImages);
     popupImage.src = placeImage.src;
     popupImage.alt = placeImage.alt;
     popupName.textContent = placeTitle.textContent;
   });
-
-  return place;
 }
 
 function submitFormPlace(evt) {
   evt.preventDefault();
-  const place = createPlace(placeFormInfo.value, placeFormImage.value);
-  addPlace(place);
+  const place =  new Card(placeFormInfo.value, placeFormImage.value);
+  addPlace(place.getCard());
+  openPlaceForm(place.getCard());
   togglePopupPlace();
 }
 
 initialCards.forEach(function(item){
-  const place = createPlace(item.name, item.link);
-  addPlace(place);
+  const place = new Card(item.name, item.link);
+  addPlace(place.getCard());
+  openPlaceForm(place.getCard());
 });
 
 function removeErrorMessage (popup){
@@ -151,6 +149,13 @@ function closeByEscape(evt) {
     toggleClass(activePopup);
   }
 }
+
+
+formList.forEach((formElement) => {
+   const validator = new FormValidator(validationList, formElement)
+   validator.enableValidation()
+});
+
 
 popupProfile.addEventListener('click',function(evt){
   if (evt.target === popupProfile){

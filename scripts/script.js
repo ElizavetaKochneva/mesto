@@ -24,7 +24,7 @@ const popupName = document.querySelector('.popup__name');
 
 const places= document.querySelector('.places');
 
-const escape = 'Escape'
+const escape = 'Escape';
 
 const initialCards = [
     {

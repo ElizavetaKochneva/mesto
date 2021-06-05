@@ -24,6 +24,8 @@ const popupName = document.querySelector('.popup__name');
 
 const places= document.querySelector('.places');
 
+const escape = 'Escape'
+
 const initialCards = [
     {
       name: 'Архыз',
@@ -131,7 +133,7 @@ function removeErrorMessage (popup){
 }
 
 function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
+  if (evt.key === escape) {
     const activePopup = document.querySelector('.popup_is-opened')
     togglePopupOpenClass(activePopup);
   }

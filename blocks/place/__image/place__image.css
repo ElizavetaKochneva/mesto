@@ -3,4 +3,9 @@
   height: 282px;
   object-fit: fill;
   background-position: center;
+  display: block;
+}
+
+.place__image:hover{
+  cursor: pointer;
 }

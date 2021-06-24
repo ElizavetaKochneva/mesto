@@ -1,4 +1,4 @@
-class FormValidator{
+export default class FormValidator{
   _formSelector;
   _inputSelector;
   _submitButtonSelector;
@@ -76,5 +76,3 @@ class FormValidator{
     this._setEventListeners();
    };
 }
-
-export default FormValidator

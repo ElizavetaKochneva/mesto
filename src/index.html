@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Путешествия по России</title>
 </head>
 <body class="body">
@@ -13,7 +12,7 @@
 
   <main class="content">
     <section class="profile body__container">
-      <img  class="profile__image" src="images/kusto.png" alt="Жак-Ив Кусто">
+      <img  class="profile__image" src="<%=require('./images/kusto.png')%>" alt="Жак-Ив Кусто">
       <div class="profile__form">
         <div class="profile__name">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -79,6 +78,5 @@
       </div>
     </article>
   </template>
-  <script type="module" src="./scripts/script.js"></script>
 </body>
 </html>

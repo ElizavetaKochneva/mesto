@@ -1,6 +1,4 @@
-import {popupImage, popupName, togglePopupOpenClass, popupImages} from './script.js';
-
-class Card{
+export default class Card{
   _placeTemplate = document.querySelector('#place-template').content;
   _place;
   _name;
@@ -9,17 +7,18 @@ class Card{
   _placeTitle;
   _placeImage;
 
-  constructor(name, link) {
+  constructor(name, link, openPopup) {
     this._name = name;
     this._link = link;
+    this._openPopup = openPopup;
   }
 
   _deletePlace = () => {
-      this._place.remove();
+    this._place.remove();
   }
 
   _likePlace = () => {
-      this._like.classList.toggle('place__like_active');
+    this._like.classList.toggle('place__like_active');
   }
 
   _addListeners = () => {
@@ -41,10 +40,7 @@ class Card{
   _openPlaceForm = () =>{
     const thisObject = this;
     this._placeImage.addEventListener('click',function(){
-      togglePopupOpenClass(popupImages);
-      popupImage.src = thisObject._placeImage.src;
-      popupImage.alt = thisObject._placeImage.alt;
-      popupName.textContent = thisObject._placeTitle.textContent;
+      thisObject._openPopup(thisObject._placeImage, thisObject._placeTitle);
     });
   }
 
@@ -56,5 +52,3 @@ class Card{
     return this._place
   }
 }
-
-export default Card

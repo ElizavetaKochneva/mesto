@@ -14,6 +14,7 @@ export const popupImage = document.querySelector('.popup__image');
 export const popupName = document.querySelector('.popup__name');
 
 export const containerSelector = '.places';
+export const placeTemplateSelector = '#place-template';
 
 export const escape = 'Escape';
 

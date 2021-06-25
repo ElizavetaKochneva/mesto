@@ -1,14 +1,4 @@
 export default class FormValidator{
-  _formSelector;
-  _inputSelector;
-  _submitButtonSelector;
-  _inactiveButtonClass;
-  _inputErrorClass;
-  _errorClass;
-  _form;
-  _inputList;
-  _buttonElement;
-  
   constructor(validationList, form) {
     this._formSelector = validationList.formSelector,
     this._inputSelector = validationList.inputSelector,
@@ -44,22 +34,21 @@ export default class FormValidator{
   _setEventListeners = () => {
     this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
     this._buttonElement = this._form.querySelector(this._submitButtonSelector)
-    const thisObject = this;
-    this._inputList.forEach(function(inputElement){
-      inputElement.addEventListener('input', function() {
-        thisObject._checkInputValidity(inputElement);
-        thisObject._toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input', () => {
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState();
       });
     });
   };
   
-  _hasInvalidInput=()=> {
+  _hasInvalidInput= () => {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   }
   
-  _toggleButtonState=()=>{
+  _toggleButtonState= () =>{
     if (this._hasInvalidInput()) {
     this._buttonElement.classList.add(this._inactiveButtonClass);
     this._buttonElement.disabled = true;
@@ -75,4 +64,18 @@ export default class FormValidator{
     });
     this._setEventListeners();
    };
+
+  clearValidation = (saveStatus) => {
+    this._inputList.forEach((inputElement) => {
+      inputElement.classList.remove(this._inputErrorClass);
+      this._form.querySelector(`#${inputElement.id}-error`).classList.remove(this._errorClass);
+    });
+    if(saveStatus){
+      this._buttonElement.classList.add(this._inactiveButtonClass);
+    }
+    else{
+      this._buttonElement.classList.remove(this._inactiveButtonClass);
+    }
+    this._buttonElement.disabled = saveStatus;
+  }
 }

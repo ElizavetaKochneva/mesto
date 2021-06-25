@@ -9,40 +9,23 @@ export default class PopupWithForm extends Popup{
     this.setEventListeners();
   }
 
-  open = (info) => {
-    const elements = this._getInputValues();
-    for(let i=0; i<elements.length; i++) {
-      elements[i].value = info[i];
-      elements[i].classList.remove('popup__title-error');
-    }
-    if(info[2] === true){
-      this._popupSave.classList.add('popup__save-error');
-    }
-    else{
-      this._popupSave.classList.remove('popup__save-error');
-    }
-    this._popupSave.disabled = info[2];
-    const errorMessageList = Array.from(this._popup.querySelectorAll('.popup__span-error'));
-    errorMessageList.forEach((errorMessage)=> { 
-      errorMessage.classList.remove('popup__span-error_active')
-    });
-    super.open();
-  }
-
   close = () => {
     super.close();
     this._popupForm.reset();
   }
 
-  _getInputValues=() => {
-    return Array.from(this._popupForm.querySelectorAll('.popup__title'));
+  _getInputValues = () => {
+    this._inputList = this._popup.querySelectorAll('.popup__title');
+    this._formValues = {};
+    this._inputList.forEach(input => this._formValues[input.name] = input.value);
+    return this._formValues;
   }
 
-  setEventListeners = (evt) => {
+  setEventListeners = () => {
     super.setEventListeners()
     this._popupForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._submitForm();
+      this._submitForm(this._getInputValues());
       this._close();
     })
   }

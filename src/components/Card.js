@@ -20,8 +20,12 @@ export default class Card{
     this._placeImage.addEventListener('click',() =>{this._openPopup(this._name, this._link);});
   }
 
+  _getTemplate = () => {
+    return this._placeTemplate.querySelector('.place').cloneNode(true);
+  }
+
   _createPlace = () => {
-    this._place = this._placeTemplate.querySelector('.place').cloneNode(true);
+    this._place = this._getTemplate();
     this._placeImage = this._place.querySelector('.place__image');
     this._placeTitle = this._place.querySelector('.place__title');
     this._placeTitle.textContent = this._name;

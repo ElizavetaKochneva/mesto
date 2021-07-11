@@ -3,7 +3,6 @@ import { escape } from '../utils/constants.js';
 export default class Popup{
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
-    this._close = this.close.bind(this);
     this.setEventListeners();
   }
   open(){
@@ -18,7 +17,7 @@ export default class Popup{
 
   _handleEscClose = (evt) => {
     if (evt.key === escape) {
-      this._close();
+      this.close();
     }
   }
 

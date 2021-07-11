@@ -2,20 +2,56 @@
   border-radius: 50%;
   width: 120px;
   height: 120px;
+  margin: 0 30px 0 0;
+  border: none;
+  padding: 0px;
+  position: relative;
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  margin: 0 auto 22px;
+  overflow: hidden;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
 }
 
-@media(min-width:768px){
-  .profile__image{
-    margin:0 15px 0 0;
-  }
+.profile__image:hover{
+  cursor: pointer;
 }
 
-@media(min-width:1279px){
-  .profile__image{
-    margin:0 30px 0 0;
-  }
+.profile__image::before{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
+  transition: opacity .15s linear;
+  opacity: 0;
 }
- 
+
+.profile__image:hover::before{
+  opacity: 1;
+}
+
+.profile__image::after{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  content: '';
+  background-image: url(../../../images/bigPencil.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 26px;
+  background-position: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: opacity .15s linear;
+  opacity: 0;
+}
+
+.profile__image:hover::after{
+  opacity: 1;
+}

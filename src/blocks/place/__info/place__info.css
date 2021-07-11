@@ -1,8 +1,8 @@
-.place__info{
+.place__info {
   display: flex;
   flex-direction: row;
   justify-content:space-between;
-  padding: 25px 15px 31px 21px;
+  padding: 22px 15px 22px 21px;
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 900;

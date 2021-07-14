@@ -9,9 +9,8 @@ export const popupProfileSelector = '#popup_profile';
 export const profileForm = document.querySelector('#profile_form');
 export const profilePencil = document.querySelector('.profile__pencil');
 export const profileTitleSelector = '.profile__title';
-export const profileAvatarSelector = '.profile__title';
 export const profileSubtitleSelector = '.profile__subtitle';
-export const profileAvatar = document.querySelector('.profile__image');
+export const profileAvatarSelector = '.profile__image';
 
 
 export const popupPlaceSelector = '#popup_place';
@@ -19,9 +18,6 @@ export const placeForm = document.querySelector('#place_form');
 export const placeAddButton = document.querySelector('.profile__plus');
 
 export const popupImagesSelector = '#popup_images';
-
-export const popupImage = document.querySelector('.popup__image');
-export const popupName = document.querySelector('.popup__name');
 
 export const avatarForm = document.querySelector('#avatar_form');
 

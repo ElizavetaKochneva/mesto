@@ -25,6 +25,9 @@ export default class Card{
           this._like.classList.remove('place__like_active');
           this._counter.textContent = data.likes.length
         })
+        .catch (err=>{ 
+          console.log(err); 
+        }) 
     }
     else {
       this._putLike(this._id)
@@ -32,6 +35,9 @@ export default class Card{
           this._like.classList.add('place__like_active');
           this._counter.textContent = data.likes.length
         })
+        .catch (err=>{ 
+          console.log(err); 
+        }) 
     }
   }
 

@@ -2,7 +2,6 @@ import './index.css';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithDelete from '../components/PopupWithDelete.js';
-import PopupWithAvatar from '../components/PopupWithAvatar.js';
 import PopupWithForm from '../components/PopupWithForm.js'
 import PopupWithImage from '../components/PopupWithImage.js';
 import FormValidator from '../components/FormValidator.js';
@@ -12,7 +11,7 @@ import { containerSelector, popupImagesSelector,
   popupProfileSelector, popupPlaceSelector, profileTitleSelector, 
   profileSubtitleSelector, popupAcceptanceSelector, popupAvatarSelector, 
   profilePencil, placeAddButton, validationList, profileForm, placeForm, avatarForm, 
-  placeTemplateSelector, headers, baseUrl, profileAvatar } from '../utils/constants.js';
+  placeTemplateSelector, headers, baseUrl, profileAvatarSelector, popupImage } from '../utils/constants.js';
 let myUserId = '';
 
 
@@ -20,36 +19,45 @@ const profileFormValidator = new FormValidator(validationList, profileForm);
 const placeFormValidator = new FormValidator(validationList, placeForm);
 const avatarFormValidator = new FormValidator(validationList, avatarForm);
 const popupWithImage = new PopupWithImage(popupImagesSelector);
-const profile = new UserInfo ({ profileTitleSelector, profileSubtitleSelector, profileAvatar });
+const profile = new UserInfo ({ profileTitleSelector, profileSubtitleSelector, profileAvatarSelector });
 const api = new Api ({ baseUrl, headers });
 const popupAcceptance = new PopupWithDelete( popupAcceptanceSelector, api.deleteCards );
-const popupAvatar = new PopupWithAvatar( popupAvatarSelector, api.patchAvatar, profile.setAvatar );
 
+const popupAvatar = new PopupWithForm( popupAvatarSelector, 
+  ({ profile_avatar }) => {
+    api.patchAvatar(profile_avatar)
+    .then((data) => {
+      popupAvatar.close();
+      profile.setAvatar(data.avatar);
+    })
+  });
 
 const popupProfile = new PopupWithForm(
   popupProfileSelector,
   ({ profile_title, profile_subtitle }) => {
-    profile.setUserInfo({ name: profile_title, title: profile_subtitle});
     api.patchProfile( profile_title, profile_subtitle )
+    .then((data) => {
+      popupProfile.close();
+      profile.setUserInfo({ name: data.name, title: data.about});
+    })
+    .catch((err) => {
+      console.log(err);
+    }); 
   }
 )
 
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+.then((data) => {
+  profile.setUserInfo({ name: data[0].name, title:data[0].about });
+  profile.setAvatar(data[0].avatar);
+  myUserId = data[0]._id;
 
-api.getUserInfo()
-  .then ((data) => {
-    profile.setUserInfo({ name: data.name, title:data.about });
-    profile.setAvatar(data.avatar);
-    myUserId = data._id;
-  })
-
-api.getInitialCards()
-  .then ((data) => {
-    const cardsList = new Section ({
-      items: data.reverse(),
-      renderer:(item) => {
-        cardsList.addItem(createCard(item._id, item.name, item.link, item.likes, item.owner._id))
-      }},
-    containerSelector
+  const cardsList = new Section ({
+    items: data[1].reverse(),
+    renderer:(item) => {
+      cardsList.addItem(createCard(item._id, item.name, item.link, item.likes, item.owner._id))
+    }},
+  containerSelector
   )
   cardsList.renderItems();
   const popupPlace = new PopupWithForm(
@@ -58,16 +66,20 @@ api.getInitialCards()
       api.postCards(place_info,place_image)
         .then((data) => {
           cardsList.addItem(createCard(data._id, place_info, place_image, data.likes, data.owner._id))
+          popupPlace.close()
         })
     }
   )
+  popupPlace.setEventListeners();
 
   placeAddButton.addEventListener('click',() => {
     placeFormValidator.clearValidation(true);
     popupPlace.open();
   });
-  
-  })
+})
+.catch((err) => {
+  console.log(err);
+}); 
 
 function createCard (id, name, link, likes, ownerId) {
   const place = new Card(id, name, link, likes, ownerId, myUserId, placeTemplateSelector, 
@@ -84,7 +96,7 @@ profilePencil.addEventListener('click',() => {
   popupProfile.open();
 });
 
-profileAvatar.addEventListener('click',() => {
+document.querySelector(profileAvatarSelector).addEventListener('click',() => {
   avatarFormValidator.clearValidation(true);
   popupAvatar.open();
 });
@@ -92,3 +104,7 @@ profileAvatar.addEventListener('click',() => {
 profileFormValidator.enableValidation();
 placeFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
+popupAvatar.setEventListeners();
+popupAcceptance.setEventListeners();
+popupProfile.setEventListeners();
+popupWithImage.setEventListeners();

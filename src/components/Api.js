@@ -49,12 +49,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(res=> { 
-      if(res.ok) { 
-        return true 
-      } 
-      return Promise.reject(`Ошибка: ${res.status}`) 
-    })
+    .then(this._checkResponse)
   }
 
   putLike = (cardId) => {

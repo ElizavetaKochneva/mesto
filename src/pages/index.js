@@ -30,6 +30,9 @@ const popupAvatar = new PopupWithForm( popupAvatarSelector,
       popupAvatar.close();
       profile.setAvatar(data.avatar);
     })
+    .catch((err) => {
+      console.log(err);
+    })
   });
 
 const popupProfile = new PopupWithForm(
@@ -67,6 +70,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
         .then((data) => {
           cardsList.addItem(createCard(data._id, place_info, place_image, data.likes, data.owner._id))
           popupPlace.close()
+        })
+        .catch((err) => {
+          console.log(err);
         })
     }
   )

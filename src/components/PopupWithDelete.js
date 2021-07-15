@@ -15,12 +15,12 @@ export default class PopupWithDelete extends Popup{
 
   _deleteCard = () => {
     this._deleteCards(this._cardId)
-      .then((res) => {
-        if(res === true) {
-          this._card.remove();
-          this.close();
-        }
-      })
+    .then((data) => {
+      if(data.message === 'Пост удалён') {
+        this._card.remove();
+        this.close();
+      }
+    })
   }
 
   setEventListeners = () => {
